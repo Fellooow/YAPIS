@@ -1,0 +1,59 @@
+begin(
+	fruit = "banana" 
+	num = "3" 
+	fruits = {"apple", "banana", "cherry"}  	num = "three"
+	first num, second_num = "1", "4"
+	st = "spam"
+)
+
+///////////////
+begin(
+	one = "one"
+	another_one = "one"
+	nums = ["1", "2", "3", "4", "5"]
+
+	string summary (string one, string another_one)
+		if one == another_one:
+			print("two")
+
+		else:
+			print(string one + " " + string another_one) ///////// "one one"
+
+	string summary (nums[])
+		for num in nums:
+			print(num) 
+)
+///////////////////
+
+begin(
+	key = input("Type number for continue")
+	switch(key):
+		case 1:
+			print("You"re right!")
+		case 2:
+			("You"re not right!")
+		case 3:
+			("You"re wrong!")
+		case 4:
+			("You"re not wrong")
+)
+
+////////////////
+
+begin(
+	alphabet = "abcdef"
+	second_alphabet = "abcdef"
+	third_alphabet = aplphabet *  second_alphabet
+	print(third_alphabet) ////// aabbccddeeff
+
+	something = third_alphabet / alphabet
+	print(something) ////////// abcdef
+	
+	print(alphabet - second_alphabet) ///////// ""
+	
+	anything = "anything"
+	print(anything.find("thing")) ////////// 3
+	print(anything.replace("any", "some")) /////// something
+)
+
+	

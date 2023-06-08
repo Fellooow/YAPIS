@@ -1,0 +1,59 @@
+lexer grammar ExprLexer;
+BEGIN: 'begin' ;
+AND : 'and' ;
+OR : 'or' ;
+NOT : 'not' ;
+EXMARK: '!';
+UCOMA: '"' ;
+COMMA : ',' ;
+SEMI : ';' ;
+COLON: ':' ;
+DOT: '.' ;
+
+LCUBE: '[' ;
+RCUBE: ']' ;
+LPAREN : '(' ;
+RPAREN : ')' ;
+LCURLY : '{' ;
+RCURLY : '}' ;
+
+IF: 'if' ;
+ELSE: 'else';
+FOR: 'for';
+WHILE: 'while';
+SWITCH: 'switch';
+CASE: 'case';
+IN: 'in';
+FUNC: 'func' ;
+TYPE : 'string' | 'int' | 'list';
+RETURN: 'return';
+EQ: '==' ;
+NOTEQ: '!=' ;
+M: '>' ;
+NM: '<' ;
+INIT : '=' ;
+PLUS: '+' ;
+INCREMENT: '++';
+DECREMENT: '--';
+MULT:'*';
+MINUS: '-';
+
+STRING: '"'(ID
+|EQ
+|NOTEQ
+|M
+|NM
+|INIT
+|PLUS
+|LCUBE
+|RCUBE
+|LPAREN
+|RPAREN
+|LCURLY
+|RCURLY
+|INT
+|EXMARK
+)'"';
+INT: [0-9]+;
+ID: [a-zA-Z_][a-zA-Z_0-9]* ;
+WS: [ \t\n\r\f]+ -> skip ;

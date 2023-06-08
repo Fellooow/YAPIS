@@ -1,0 +1,58 @@
+parser grammar ExprParser;
+options { tokenVocab=ExprLexer; }
+
+program
+    : def* BEGIN '(' stat* ')' EOF?
+    ;
+
+stat: ID (',' ID)* INIT
+    expr (',' expr)* 
+    | expr 
+    | if
+    | def
+    | for
+    | while
+    | switch
+    ;
+for: FOR  expr IN expr COLON (stat)+;
+ 
+ if:IF  ifExpr  COLON
+    (stat)+ 
+    ELSE COLON (stat)+
+    | IF '('expr')' 
+         (stat)+ 
+    ;
+def :TYPE ID '(' expr (',' expr)* ')' COLON (stat)+ RETURN expr 
+    ;
+while:WHILE '(' ifExpr ')' COLON (stat)+;
+
+switch: SWITCH '('expr')' COLON (CASE expr COLON (stat)+)+;
+
+
+varibleDeclaration:  TYPE ID(','ID)*
+    |TYPE varibleInitialisation
+;
+
+varibleInitialisation: ID INIT ID
+    ;
+
+list: '{' expr? (',' expr)* '}';
+index: '{'expr?'}'|'{'expr?'}';
+ifExpr: expr (EQ|NOTEQ|M|NM) expr;
+op: (PLUS|MINUS|MULT);
+expr: ID
+    | STRING
+    | INT
+    | varibleDeclaration
+    | varibleInitialisation
+    | func
+    | list
+    | expr index
+    | expr INIT expr
+    | expr (INCREMENT|DECREMENT)
+    | expr'.'expr
+    | expr op expr 
+    ;
+    
+func :TYPE ID '(' expr? (',' expr)* ')'
+| ID '(' expr? (',' expr)* ')';

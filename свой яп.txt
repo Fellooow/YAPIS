@@ -1,0 +1,189 @@
+number = 0
+str = 'I love Python'
+letter = 'l'
+
+if letter in str:
+  number = 1
+
+print(number)
+
+////////////////
+
+string st = "spam"
+
+print(st[-1::-1])
+
+////////////////
+
+a = ["Jake", "Mike", "Brien", "Heisenberg"]
+a.insert(14, "Kenny")
+
+print(a)
+
+//////////////////
+
+fruits = {"apple", "banana", "cherry"}
+fruits.add("orange")
+
+print(fruits)
+
+/////////////////////
+
+fruit = "banana" # String fruit
+num = '3' # Char num
+fruits = {"apple", "banana", "cherry"}  # Array of strings fruits
+num = "three"
+first num, second_num = '1', '4'
+
+
+///////////////
+one = "one"
+another_one = "one"
+
+string summary (string one, string another_one)
+	if one == another_one:
+		print("two")
+
+	else:
+		print(string one + string another_one)
+
+///////////////////
+
+key = input("Type number for continue")
+switch(key):
+	case 1:
+		print("You're right!")
+	case 2:
+		("You're not right!")
+	case 3:
+		("You're wrong!")
+	case 4:
+		("You're not wrong")
+
+
+
+Грамматика ANTLR
+//parser
+
+parser grammar ExprParser;
+options { tokenVocab=ExprLexer; }
+
+program
+    : def* BEGIN '(' stat* ')' EOF?
+    ;
+
+stat: ID (',' ID)* INIT
+    expr (',' expr)* 
+    | expr 
+    | if
+    | def
+    | for
+    | while
+    | switch
+    ;
+for: FOR  expr IN expr COLON (stat)+;
+ 
+ if:IF  ifExpr  COLON
+    (stat)+ 
+    ELSE COLON (stat)+
+    | IF '('expr')' 
+         (stat)+ 
+    ;
+def :TYPE ID '(' expr (',' expr)* ')' COLON (stat)+ RETURN expr 
+    ;
+while:WHILE '(' ifExpr ')' COLON (stat)+;
+
+switch: SWITCH '('expr')' COLON (CASE expr COLON (stat)+)+;
+
+
+varibleDeclaration:  TYPE ID(','ID)*
+    |TYPE varibleInitialisation
+;
+
+varibleInitialisation: ID INIT ID
+    ;
+
+list: '{' expr? (',' expr)* '}';
+index: '{'expr?'}'|'{'expr?'}';
+ifExpr: expr (EQ|NOTEQ|M|NM) expr;
+op: (PLUS|MINUS|MULT);
+expr: ID
+    | STRING
+    | INT
+    | varibleDeclaration
+    | varibleInitialisation
+    | func
+    | list
+    | expr index
+    | expr INIT expr
+    | expr (INCREMENT|DECREMENT)
+    | expr'.'expr
+    | expr op expr 
+    ;
+    
+func :TYPE ID '(' expr? (',' expr)* ')'
+| ID '(' expr? (',' expr)* ')';
+
+
+
+//lexer
+// DELETE THIS CONTENT IF YOU PUT COMBINED GRAMMAR IN Parser TAB
+lexer grammar ExprLexer;
+BEGIN: 'begin' ;
+AND : 'and' ;
+OR : 'or' ;
+NOT : 'not' ;
+EXMARK: '!';
+UCOMA: '"' ;
+COMMA : ',' ;
+SEMI : ';' ;
+COLON: ':' ;
+DOT: '.' ;
+
+LCUBE: '[' ;
+RCUBE: ']' ;
+LPAREN : '(' ;
+RPAREN : ')' ;
+LCURLY : '{' ;
+RCURLY : '}' ;
+
+IF: 'if' ;
+ELSE: 'else';
+FOR: 'for';
+WHILE: 'while';
+SWITCH: 'switch';
+CASE: 'case';
+IN: 'in';
+FUNC: 'func' ;
+TYPE : 'string' | 'int' | 'list';
+RETURN: 'return';
+EQ: '==' ;
+NOTEQ: '!=' ;
+M: '>' ;
+NM: '<' ;
+INIT : '=' ;
+PLUS: '+' ;
+INCREMENT: '++';
+DECREMENT: '--';
+MULT:'*';
+MINUS: '-';
+
+STRING: '"'(ID
+|EQ
+|NOTEQ
+|M
+|NM
+|INIT
+|PLUS
+|LCUBE
+|RCUBE
+|LPAREN
+|RPAREN
+|LCURLY
+|RCURLY
+|INT
+|EXMARK
+)'"';
+INT: [0-9]+;
+ID: [a-zA-Z_][a-zA-Z_0-9]* ;
+WS: [ \t\n\r\f]+ -> skip ;
