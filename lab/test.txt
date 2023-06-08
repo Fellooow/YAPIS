@@ -1,0 +1,9 @@
+
+
+banana = "banana"
+a, b = 1, 5
+num = "3"
+num = "three"
+first_num, second_num = "1", "4"
+fruit = apple
+st = "spam"
